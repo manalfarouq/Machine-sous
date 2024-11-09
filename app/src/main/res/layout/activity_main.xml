@@ -1,68 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:fitsSystemWindows="true">
 
-    <!-- Balance Text with Larger Size and Decoration -->
+    <!-- TextView simple pour déboguer la mise en page -->
     <TextView
-        android:id="@+id/tvBalance"
+        android:id="@+id/soldeTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Solde : 1000"
-        android:textSize="24sp"
-        android:textColor="@color/purple"
-        android:textStyle="bold"
-        android:padding="8dp"
-        android:layout_marginBottom="24dp" />
+        android:layout_height="24dp"
+        android:layout_marginLeft="160dp"
+        android:text="Solde: 100"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
-
-
-    <!-- Images with Spacing -->
-    <ImageView
-        android:id="@+id/reel1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="16dp" />
-
-    <ImageView
-        android:id="@+id/reel2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="16dp" />
-
-    <ImageView
-        android:id="@+id/reel3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="24dp" />
-
-    <!-- Horizontal Button Layout with Spacing -->
-    <LinearLayout
+    <!-- Sélection de la mise -->
+    <RadioGroup
+        android:id="@+id/miseRadioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp">
+        app:layout_constraintTop_toBottomOf="@+id/soldeTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="32dp">
 
-        <Button
-            android:id="@+id/btnPlay"
+        <RadioButton
+            android:id="@+id/mise1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Play"
-            android:layout_marginEnd="16dp" />
+            android:text="1$" />
 
-        <Button
-            android:id="@+id/btnReset"
+        <RadioButton
+            android:id="@+id/mise2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reset" />
-    </LinearLayout>
+            android:text="2$" />
 
-</LinearLayout>
+        <RadioButton
+            android:id="@+id/mise5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5$" />
+    </RadioGroup>
+
+    <!-- Code secret et bouton pour ajouter de l'argent -->
+    <EditText
+        android:id="@+id/codeSecretEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Entrez le code secret"
+        app:layout_constraintTop_toBottomOf="@+id/miseRadioGroup"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="32dp"
+        android:padding="16dp"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/ajouterSoldeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ajouter 100$"
+        app:layout_constraintTop_toBottomOf="@+id/codeSecretEditText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Option de jouer sans code -->
+    <Button
+        android:id="@+id/pasDeCodeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jouer sans code"
+        app:layout_constraintTop_toBottomOf="@+id/ajouterSoldeButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Casse-Cou CheckBox -->
+    <CheckBox
+        android:id="@+id/casseCouCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Mode casse-cou"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pasDeCodeButton" />
+
+    <Button
+        android:id="@+id/jouerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jouer"
+        app:layout_constraintTop_toBottomOf="@+id/casseCouCheckBox"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="32dp"/>
+
+    <!-- Les rouleaux du jeu -->
+    <ImageView
+        android:id="@+id/monImageView1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jouerButton" />
+
+    <ImageView
+        android:id="@+id/monImageView2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintLeft_toRightOf="@+id/monImageView1"
+        app:layout_constraintTop_toBottomOf="@+id/jouerButton" />
+
+    <ImageView
+        android:id="@+id/monImageView3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintLeft_toRightOf="@+id/monImageView2"
+        app:layout_constraintTop_toBottomOf="@+id/jouerButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
